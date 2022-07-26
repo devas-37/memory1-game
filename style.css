@@ -34,6 +34,7 @@ body {
   padding: 15px 30px;
   font-weight: bold;
   cursor: pointer;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .restart:active {
@@ -59,7 +60,7 @@ body {
 }
 
 .flip-card {
-    margin: 5px;
+  margin: 5px;
   background-color: transparent;
   width: 70px;
   height: 70px;
