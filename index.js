@@ -39,11 +39,11 @@ const emojis = [
   "🌭",
   "🍗",
   "🧅",
-];
+]
 
-
-let h = 0
-let uzunlik = emojis.length-1
+h = 0
+let massiv = []
+let uzunlik = emojis.length - 1;
 function creatingCard() {
   let flipCard = d("div");
   flipCard.className = "flip-card";
@@ -53,36 +53,43 @@ function creatingCard() {
   flipCardFront.className = "flip-card-front";
   let flipCardBack = d("div");
   flipCardBack.className = "flip-card-back";
-  flipCardBack.innerText =  emojis[uzunlik];
-  console.log(flipCardBack.innerText)
-  uzunlik --
+  flipCardBack.innerText = emojis[uzunlik];
+  uzunlik--;
   flipCardInner.appendChild(flipCardFront);
   flipCardInner.appendChild(flipCardBack);
   flipCard.appendChild(flipCardInner);
-  flipCard.addEventListener("click", () => {
-    h++;
-    flipCardInner.style.transform = "rotateY(180deg)";
-    console.log(flipCardBack, flipCardBack)
-    if(h === 2) {
-        console.log(flipCardBack.innerText)
-        if(flipCardBack.innerText == flipCardBack.innerText) {
-            console.log(flipCardInner.style.transform = 'rotateY(180deg)')
-            console.log('yaxshiiii')
+  flipCardInner.style.transform = "rotateY(180deg)"
+  setTimeout(() => {
+    flipCardInner.style.transform = "rotateY(0deg)"
+  }, 5000)
+    flipCard.addEventListener("click", () => {
+      h ++
+      flipCardInner.style.transform = "rotateY(180deg)"
+      massiv.push(flipCardInner)
+      if (h === 2) {
+        if (massiv[0].innerText === massiv[1].innerText) {
+          massiv[0].style.transform = "rotateY(180deg)"
+          massiv[1].style.transform = "rotateY(180deg)"
         }
-        setInterval(() => {
-            flipCardInner.style.transform = 'rotateY(0deg)'
-            clearInterval()
-        },1000)
-        h=0
-    }
-  });
+        else {
+          setTimeout(() => {
+            massiv[0].style.transform = "rotateY(0deg)"
+            massiv[1].style.transform = "rotateY(0deg)"
+          }, 1000)
+        }
+      }
+      if (massiv.length === 3) {
+        massiv = []
+        massiv.push(flipCardInner)
+        h = 1
+      }
+    });
   game.appendChild(flipCard);
 }
-
 function shuffle(array) {
   let currentIndex = emojis.length,
-    randomIndex;
-  while (currentIndex != 0) {
+  randomIndex;
+  while (currentIndex !== 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
     [array[currentIndex], array[randomIndex]] = [
@@ -92,8 +99,7 @@ function shuffle(array) {
   }
   return array;
 }
-shuffle(emojis);
-console.log(emojis)
+shuffle(emojis)
 
 for (let i = 0; i < 36; i++) {
   creatingCard();
